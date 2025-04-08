@@ -32,6 +32,5 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 
 void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
   validationTarget(executor);
-  std::cout << target << " has been pardoned by Zaphod Beeblebrox."
-            << std::endl;
+  std::cout << target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }

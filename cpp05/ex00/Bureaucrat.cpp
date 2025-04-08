@@ -76,17 +76,12 @@ const char *Bureaucrat::GradeTooHighException::what() const noexcept {
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const noexcept {
-  return "Grade too low"; // Returns pointer to string literal (safe) : saved in
-                          // static memory exsists until the program ends
+  return "Grade too low"; // Returns pointer to string literal (safe) : saved in 
+  // static memory exsists until the program ends
 }
 
 // out of the class
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &bureaucrat) {
   out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
   return out;
-}
-
-void Bureaucrat::signForm(Form & form)
-{
-    
 }

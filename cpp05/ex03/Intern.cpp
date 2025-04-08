@@ -2,6 +2,8 @@
 #include "PresidentialPardonForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include <sstream>
+#include <stdexcept>
 
 Intern::Intern() {}
 
@@ -26,15 +28,17 @@ AForm *Intern::makeForm(std::string const &formName, const std::string &target)
                                          &Intern::createRobotomyForm,
                                          &Intern::createPresidentialForm};
 
-  for (int i = 0; i < NUM_FORMS; i++) {
-    if (formNames[i] == formName) {
-      // need to *fromcreators to call the function as it is pointer itself
-      AForm *form = (this->*formCreators[i])(target);
-      std::cout << "Intern creates " << form->getName() << std::endl;
-      return form;
+    for (int i = 0; i < NUM_FORMS; i++) {
+      if (formNames[i] == formName) {
+        // need to *fromcreators to call the function as it is pointer itself
+        AForm *form = (this->*formCreators[i])(target);
+        std::cout << "Intern creates " << form->getName() << std::endl;
+        return form;
+      }
     }
-    }
-    std::cout << "Error: form '" << formName << "' does not exist" << std::endl;
+    std::ostringstream out;
+    out << "Error: form " << formName << "' does not exist";
+    throw std::runtime_error(out.str());
     return nullptr;
 }
 
