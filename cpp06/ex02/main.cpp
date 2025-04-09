@@ -6,18 +6,16 @@
 #include <ctime>
 #include <iostream>
 
-Base *generate(void) {
-  // Seed random number generator (only once)
+Base *generate(void) 
+{
   static bool seeded = false;
   if (!seeded) {
     std::srand(std::time(NULL));
     seeded = true;
   }
-
   // Generate a random number between 0 and 2
   int random = std::rand() % 3;
 
-  // Create and return an instance based on the random number
   switch (random) {
   case 0:
     std::cout << "Generated an A object" << std::endl;
@@ -59,7 +57,7 @@ void identify(Base &p) {
 
   try {
     B &refB = dynamic_cast<B &>(p);
-    (void)refB; // To avoid unused variable warning
+    (void)refB;
     std::cout << "B" << std::endl;
     return;
   } catch (std::bad_cast &) {
@@ -67,7 +65,7 @@ void identify(Base &p) {
 
   try {
     C &refC = dynamic_cast<C &>(p);
-    (void)refC; // To avoid unused variable warning
+    (void)refC;
     std::cout << "C" << std::endl;
     return;
   } catch (std::bad_cast &) {
@@ -77,7 +75,6 @@ void identify(Base &p) {
 }
 
 int main() {
-  // Generate random objects several times
   std::cout << "----- Testing generate function -----" << std::endl;
   Base *obj1 = generate();
   Base *obj2 = generate();
@@ -105,7 +102,6 @@ int main() {
   std::cout << "obj3 is: ";
   identify(*obj3);
 
-  // Clean up
   delete obj1;
   delete obj2;
   delete obj3;

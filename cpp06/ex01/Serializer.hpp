@@ -6,7 +6,6 @@
 
 class Serializer {
 private:
-  // Private constructor to prevent instantiation
   Serializer();
   Serializer(const Serializer &other);
   Serializer &operator=(const Serializer &other);

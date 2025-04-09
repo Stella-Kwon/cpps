@@ -6,7 +6,6 @@
 #include <limits>
 #include <string>
 
-// Private constructor implementations
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter &other) { (void)other; }
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other) {
@@ -32,10 +31,11 @@ bool ScalarConverter::isInt(const std::string &literal) {
     if (!isdigit(literal[i]))
       return false;
   }
-  return !literal.empty() && startPos < literal.length();
+  return startPos < literal.length();
 }
 
-bool ScalarConverter::isFloat(const std::string &literal) {
+bool ScalarConverter::isFloat(const std::string &literal) 
+{
   if (isSpecialFloat(literal))
     return true;
 
@@ -48,16 +48,18 @@ bool ScalarConverter::isFloat(const std::string &literal) {
   if (literal[0] == '+' || literal[0] == '-')
     startPos = 1;
 
-  for (size_t i = startPos; i < literal.length() - 1; i++) {
-    if (literal[i] == '.') {
+  for (size_t i = startPos; i < literal.length() - 1; i++) 
+  {
+    if (literal[i] == '.') 
+    {
       if (hasDecimalPoint)
         return false;
       hasDecimalPoint = true;
-    } else if (!isdigit(literal[i])) {
+    } 
+    else if (!isdigit(literal[i])) {
       return false;
     }
   }
-
   return hasDecimalPoint;
 }
 
@@ -71,7 +73,8 @@ bool ScalarConverter::isDouble(const std::string &literal) {
   if (literal[0] == '+' || literal[0] == '-')
     startPos = 1;
 
-  for (size_t i = startPos; i < literal.length(); i++) {
+  for (size_t i = startPos; i < literal.length(); i++) 
+  {
     if (literal[i] == '.') {
       if (hasDecimalPoint)
         return false;
@@ -92,7 +95,7 @@ bool ScalarConverter::isSpecialDouble(const std::string &literal) {
   return literal == "nan" || literal == "+inf" || literal == "-inf";
 }
 
-// Conversion methods
+
 void ScalarConverter::convertFromChar(char value) {
   // To char
   if (isprint(value))
@@ -131,29 +134,37 @@ void ScalarConverter::convertFromInt(int value) {
   std::cout << "double: " << static_cast<double>(value) << ".0" << std::endl;
 }
 
-void ScalarConverter::convertFromFloat(float value) {
-  // To char
-  if (isnan(value) || isinf(value)) {
+void ScalarConverter::convertFromFloat(float value) 
+{   
+  // to char
+  if (isnan(value) || isinf(value)) 
+  {
     std::cout << "char: impossible" << std::endl;
-  } else if (value >= 0 && value <= 127) {
+  } 
+  else if (value >= 0 && value <= 127) 
+  {
     if (isprint(static_cast<int>(value)))
       std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
     else
       std::cout << "char: Non displayable" << std::endl;
-  } else {
+  } 
+  else 
+  {
     std::cout << "char: impossible" << std::endl;
   }
-
-  // To int
+ // to int
   if (isnan(value) || isinf(value) || value > std::numeric_limits<int>::max() ||
-      value < std::numeric_limits<int>::min()) {
+      value < std::numeric_limits<int>::min()) 
+      {
     std::cout << "int: impossible" << std::endl;
-  } else {
+  } 
+  else {
     std::cout << "int: " << static_cast<int>(value) << std::endl;
   }
 
   // To float
-  // Check if the value is a whole number
+  // Check if the value is a whole number in typecasting to int 
+  // value is int or not (ex. 40.0 = 40)
   if (value == static_cast<int>(value))
     std::cout << "float: " << value << ".0f" << std::endl;
   else
@@ -195,9 +206,12 @@ void ScalarConverter::convertFromDouble(double value) {
       std::cout << "float: +inff" << std::endl;
     else
       std::cout << "float: -inff" << std::endl;
-  } else if (value == static_cast<int>(value)) {
+  } 
+  else if (value == static_cast<int>(value)) 
+  {
     std::cout << "float: " << static_cast<float>(value) << ".0f" << std::endl;
-  } else {
+  } 
+  else {
     std::cout << "float: " << static_cast<float>(value) << "f" << std::endl;
   }
 
@@ -209,10 +223,13 @@ void ScalarConverter::convertFromDouble(double value) {
 }
 
 void ScalarConverter::convert(const std::string &literal) {
-  if (isChar(literal)) {
+  if (isChar(literal)) 
+  {
     char c = literal[1];
     convertFromChar(c);
-  } else if (isInt(literal)) {
+  } 
+  else if (isInt(literal)) 
+  {
     long value = atol(literal.c_str());
     if (value > std::numeric_limits<int>::max() ||
         value < std::numeric_limits<int>::min()) {
@@ -223,7 +240,10 @@ void ScalarConverter::convert(const std::string &literal) {
       return;
     }
     convertFromInt(static_cast<int>(value));
-  } else if (isFloat(literal)) {
+  } 
+  else if (isFloat(literal)) 
+  {
+    // quiet_NaN and inifinity to give precising value of it.
     if (isSpecialFloat(literal)) {
       if (literal == "nanf")
         convertFromFloat(std::numeric_limits<float>::quiet_NaN());
