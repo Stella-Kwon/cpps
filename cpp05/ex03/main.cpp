@@ -106,10 +106,9 @@ int	main(void) {
 		Intern intern4;
 		Bureaucrat teamLead("Team Lead", 70);
 		AForm* rf = intern4.makeForm("random", "Employee");
-    if (rf)
-  {		teamLead.signForm(*rf);
+		teamLead.signForm(*rf);
 		teamLead.executeForm(*rf);
-		delete rf;}
+		delete rf;
 	}
 	catch (const std::exception& e) {
 		std::cerr << "Exception: " << e.what() << std::endl;
