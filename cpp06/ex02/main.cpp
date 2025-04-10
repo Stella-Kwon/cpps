@@ -80,7 +80,7 @@ int main() {
   Base *obj1 = generate();
   Base *obj2 = generate();
   Base *obj3 = generate();
-
+  Base *obj4 = nullptr;
   // Test pointer identification
   std::cout << "\n----- Testing identify with pointers -----" << std::endl;
   std::cout << "obj1 is: ";
@@ -91,6 +91,9 @@ int main() {
 
   std::cout << "obj3 is: ";
   identify(obj3);
+
+  std::cout << "obj4 is: ";
+  identify(obj4);
 
   // Test reference identification
   std::cout << "\n----- Testing identify with references -----" << std::endl;

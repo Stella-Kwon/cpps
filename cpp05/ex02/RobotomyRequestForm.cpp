@@ -34,13 +34,19 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
   validationTarget(executor);
   std::cout << "Drilllling Noises" << std::endl;
-  static bool seeded = false;
-	if (!seeded)
-	{
-		std::srand(std::time(0));
-		seeded = true;
-	}
-	if (rand() % 2 == 0)
+  // static bool seeded = false;
+	// if (!seeded)
+	// {
+	// 	std::srand(std::time(0));
+	// 	seeded = true;
+	// }
+	// if (rand() % 2 == 0)
+
+  // static so it can reuses the same generator
+  static std::mt19937 gen(std::time(nullptr));
+  // uniformly generate the value over the given range
+  static std::uniform_int_distribution<> dis(0, 1);
+  if (dis(gen))
     std::cout << target << " has been robotomized successfully!" << std::endl;
   else
     std::cout << "Robotomy of " << target << " failed." << std::endl;

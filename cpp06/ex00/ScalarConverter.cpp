@@ -15,8 +15,13 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other) {
 ScalarConverter::~ScalarConverter() {}
 
 // Detection methods
-bool ScalarConverter::isChar(const std::string &literal) {
-  return literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'';
+bool ScalarConverter::isChar(const std::string &literal) 
+{
+  if (literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')
+    return true;
+  else if (literal.length()==1)
+    return true;
+  return false ;
 }
 
 bool ScalarConverter::isInt(const std::string &literal) {
@@ -225,7 +230,11 @@ void ScalarConverter::convertFromDouble(double value) {
 void ScalarConverter::convert(const std::string &literal) {
   if (isChar(literal)) 
   {
-    char c = literal[1];
+    char c;
+    if (literal.length() == 1)
+       c = literal[0];
+    else
+       c = literal[1];
     convertFromChar(c);
   } 
   else if (isInt(literal)) 

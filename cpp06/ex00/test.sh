@@ -24,7 +24,9 @@ echo -e "${GREEN}======== SCALAR CONVERTER TEST ========${RESET}"
 echo -e "\n${YELLOW}CHARACTER TESTS:${RESET}"
 test_convert "'a'"
 test_convert "'0'"
+test_convert " "
 test_convert "' '"
+test_convert "b"
 test_convert "'\n'"
 
 # 정수 테스트

@@ -36,10 +36,10 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 
   std::cout << "Drilllling Noises" << std::endl;
 
-  std::mt19937 gen(std::time(nullptr));
+  static std::mt19937 gen(std::time(nullptr));
 
   // uniformly generate the value over the given range
-  std::uniform_int_distribution<> dis(0, 1);
+  static std::uniform_int_distribution<> dis(0, 1);
   if (dis(gen))
     std::cout << target << " has been robotomized successfully!" << std::endl;
   else
