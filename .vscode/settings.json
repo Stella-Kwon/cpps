@@ -58,6 +58,12 @@
         "text_encoding": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__node_handle": "cpp",
+        "queue": "cpp",
+        "stack": "cpp",
+        "complex": "cpp"
     }
 }
