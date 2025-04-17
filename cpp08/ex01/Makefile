@@ -1,7 +1,7 @@
 
 NAME = Span
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++23
+CFLAGS = -Wall -Wextra -Werror -std=c++20
 
 SRCS = main.cpp Span.cpp
 OBJS = $(SRCS:.cpp=.o)
