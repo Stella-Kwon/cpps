@@ -33,7 +33,8 @@ Base *generate(void)
 }
 
 void identify(Base *p) {
-  // Using dynamic_cast with pointers
+  // Using dynamic_cast with pointers, no exception even fails, returns nullptr.
+  // so just need to check nullptr if it fails.
   if (dynamic_cast<A *>(p))
     std::cout << "A" << std::endl;
   else if (dynamic_cast<B *>(p))
@@ -46,7 +47,8 @@ void identify(Base *p) {
 
 void identify(Base &p) {
   // Using dynamic_cast with references
-  // When dynamic_cast fails with references, it throws an exception
+  // When dynamic_cast fails with references, it throws an exception. 
+  // so have to catch with throw and try-catch
 
   try {
     A &refA = dynamic_cast<A &>(p);
